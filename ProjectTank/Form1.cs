@@ -52,9 +52,11 @@ namespace ProjectTank
 
             right = true; left = true; up = true; down = true;
             collision();
-            bulletMove(LastButton);
-            
-            
+            PictureBox sended= new PictureBox();
+            if(bullets.Count!=0){
+            sended = bullets[bullets.Count-1] as PictureBox;
+            bulletMove(LastButton, sended);
+            }
         }
 
         private void tank1_Click(object sender, EventArgs e)
@@ -191,6 +193,7 @@ namespace ProjectTank
                 bullet.Visible = true;
                 panel1.Controls.Add(bullet);
                 bullets.Add(bullet);
+               // bulletMove("rightkey",bullet);
             }
             
             if (direction == "leftkey")
@@ -204,6 +207,7 @@ namespace ProjectTank
                 bullet.Visible = true;
                 panel1.Controls.Add(bullet);
                 bullets.Add(bullet);
+              //  bulletMove("leftkey",bullet);
             }
             if (direction == "upkey")
             {
@@ -216,6 +220,7 @@ namespace ProjectTank
                 bullet.Visible = true;
                 panel1.Controls.Add(bullet);
                 bullets.Add(bullet);
+                //bulletMove("upkey",bullet);
             }
             if (direction == "downkey")
             {
@@ -228,37 +233,32 @@ namespace ProjectTank
                 bullet.Visible = true;
                 panel1.Controls.Add(bullet);
                 bullets.Add(bullet);
+               // bulletMove("downkey",bullet);
             }
         }
-        public void bulletMove(String direction)
+        public void bulletMove(String direction,PictureBox LastBullet)
         {
             if (direction == "rightkey")
             {
-                foreach (PictureBox bulletarray in bullets)
-                {
-                    bulletarray.Location = new Point(bulletarray.Left + 10, bulletarray.Top);
-                }
+                    LastBullet.Location = new Point(LastBullet.Left + 10, LastBullet.Top);
+                
             }
-            if (direction == "leftkey")
+            else if (direction == "leftkey")
             {
-                foreach (PictureBox bulletarray in bullets)
-                {
-                    bulletarray.Location = new Point(bulletarray.Left -10, bulletarray.Top);
-                }
+                        LastBullet.Location = new Point(LastBullet.Left - 10, LastBullet.Top);
+                 
             }
-            if (direction == "upkey")
+             else if (direction == "upkey")
             {
-                foreach (PictureBox bulletarray in bullets)
-                {
-                    bulletarray.Location = new Point(bulletarray.Left , bulletarray.Top -10);
-                }
+                
+                    LastBullet.Location = new Point(LastBullet.Left, LastBullet.Top - 10);
+                
             }
-            if (direction == "downkey")
+            else if (direction == "downkey")
             {
-                foreach (PictureBox bulletarray in bullets)
-                {
-                    bulletarray.Location = new Point(bulletarray.Left, bulletarray.Top +10);
-                }
+                
+                    LastBullet.Location = new Point(LastBullet.Left, LastBullet.Top + 10);
+                
             }
 
         }
