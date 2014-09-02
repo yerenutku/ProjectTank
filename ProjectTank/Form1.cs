@@ -14,11 +14,14 @@ namespace ProjectTank
 {
     public partial class Form1 : Form
     {
-
+        #region Global Değişkenler
         bool right, left, up, down;
         bool upkey, rightkey, leftkey, downkey;
+        bool fire;
+        String LastButton;
         ArrayList walls = new ArrayList();
-        //ilist kullan.
+        ArrayList bullets = new ArrayList();
+        #endregion
         public Form1()
         {
             InitializeComponent();
@@ -36,6 +39,7 @@ namespace ProjectTank
             walls.Add(wall8);
             walls.Add(wall9);
             walls.Add(wall10);
+           
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -44,24 +48,30 @@ namespace ProjectTank
             if (left == true && leftkey==true ) { tank1.Left -= 5; }
             if (up == true && upkey == true) { tank1.Top -= 5; }
             if (down == true && downkey == true) { tank1.Top += 5; }
+                
+
             right = true; left = true; up = true; down = true;
             collision();
-
+            bulletMove(LastButton);
             
             
         }
 
         private void tank1_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Left) { leftkey = true; }
-            if (e.KeyCode == Keys.Right) { rightkey = true; }
-            if (e.KeyCode == Keys.Up) { upkey = true;}
-            if (e.KeyCode == Keys.Down) { downkey = true;}
+            if (e.KeyCode == Keys.Left) { leftkey = true; LastButton="leftkey" ;}
+            if (e.KeyCode == Keys.Right) { rightkey = true; LastButton="rightkey" ;}
+            if (e.KeyCode == Keys.Up) { upkey = true; LastButton = "upkey";}
+            if (e.KeyCode == Keys.Down) { downkey = true; LastButton = "downkey"; }
+            if (e.KeyCode == Keys.Space)
+            {
+                bulletCreate(LastButton);
+            }
         }
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
@@ -69,7 +79,7 @@ namespace ProjectTank
             if (e.KeyCode == Keys.Right) { rightkey = false;  }
             if (e.KeyCode == Keys.Up) { upkey = false;  }
             if (e.KeyCode == Keys.Down) { downkey = false; }
-
+            if (e.KeyCode == Keys.Space) { fire = false; }
         }
         public void collision()
         {
@@ -162,6 +172,96 @@ namespace ProjectTank
 
         }
 
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        public void bulletCreate(String direction)
+        {
+            fire = true; Console.WriteLine("bullet create and showing on the screen");
+            if (direction == "rightkey")
+            {
+                PictureBox bullet = new PictureBox();
+                bullet.Name = "bullet";
+                bullet.Location = new Point(tank1.Left+tank1.Width+10, tank1.Top+tank1.Height/2-5);
+                bullet.Size = new Size(15, 15);
+                bullet.BackColor = Color.Black;
+                //bullet.Image = (Bitmap)(e.Data.GetData(DataFormats.Bitmap));
+                bullet.Visible = true;
+                panel1.Controls.Add(bullet);
+                bullets.Add(bullet);
+            }
+            
+            if (direction == "leftkey")
+            {
+                PictureBox bullet = new PictureBox();
+                bullet.Name = "bullet";
+                bullet.Location = new Point(tank1.Left -10, tank1.Top);
+                bullet.Size = new Size(15, 15);
+                bullet.BackColor = Color.Black;
+                //bullet.Image = (Bitmap)(e.Data.GetData(DataFormats.Bitmap));
+                bullet.Visible = true;
+                panel1.Controls.Add(bullet);
+                bullets.Add(bullet);
+            }
+            if (direction == "upkey")
+            {
+                PictureBox bullet = new PictureBox();
+                bullet.Name = "bullet";
+                bullet.Location = new Point(tank1.Left, tank1.Top-10);
+                bullet.Size = new Size(15, 15);
+                bullet.BackColor = Color.Black;
+                //bullet.Image = (Bitmap)(e.Data.GetData(DataFormats.Bitmap));
+                bullet.Visible = true;
+                panel1.Controls.Add(bullet);
+                bullets.Add(bullet);
+            }
+            if (direction == "downkey")
+            {
+                PictureBox bullet = new PictureBox();
+                bullet.Name = "bullet";
+                bullet.Location = new Point(tank1.Left, tank1.Top+ tank1.Height+10);
+                bullet.Size = new Size(15, 15);
+                bullet.BackColor = Color.Black;
+                //bullet.Image = (Bitmap)(e.Data.GetData(DataFormats.Bitmap));
+                bullet.Visible = true;
+                panel1.Controls.Add(bullet);
+                bullets.Add(bullet);
+            }
+        }
+        public void bulletMove(String direction)
+        {
+            if (direction == "rightkey")
+            {
+                foreach (PictureBox bulletarray in bullets)
+                {
+                    bulletarray.Location = new Point(bulletarray.Left + 10, bulletarray.Top);
+                }
+            }
+            if (direction == "leftkey")
+            {
+                foreach (PictureBox bulletarray in bullets)
+                {
+                    bulletarray.Location = new Point(bulletarray.Left -10, bulletarray.Top);
+                }
+            }
+            if (direction == "upkey")
+            {
+                foreach (PictureBox bulletarray in bullets)
+                {
+                    bulletarray.Location = new Point(bulletarray.Left , bulletarray.Top -10);
+                }
+            }
+            if (direction == "downkey")
+            {
+                foreach (PictureBox bulletarray in bullets)
+                {
+                    bulletarray.Location = new Point(bulletarray.Left, bulletarray.Top +10);
+                }
+            }
+
+        }
         
 
         
