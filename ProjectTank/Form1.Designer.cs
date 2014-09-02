@@ -172,7 +172,7 @@
             // tank1
             // 
             this.tank1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.tank1.Location = new System.Drawing.Point(507, 389);
+            this.tank1.Location = new System.Drawing.Point(640, 403);
             this.tank1.Name = "tank1";
             this.tank1.Size = new System.Drawing.Size(50, 50);
             this.tank1.TabIndex = 0;

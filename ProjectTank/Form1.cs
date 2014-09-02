@@ -75,6 +75,7 @@ namespace ProjectTank
         {
             //her collision için foreach döner.
             //hepsi tek bir foreach içinde döner ise kesişme noktalarında sadece tek bir yön çalışır ve foreach kırılır.
+            //moving actions
             foreach (PictureBox wallmember in walls){
 
                 if(wallmember.Bounds.IntersectsWith(new Rectangle(tank1.Location.X+5,tank1.Location.Y,tank1.Width,tank1.Height)))
