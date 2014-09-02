@@ -52,10 +52,11 @@ namespace ProjectTank
 
             right = true; left = true; up = true; down = true;
             collision();
-            PictureBox sended= new PictureBox();
+            Bullet_Attributes sended= new Bullet_Attributes();
             if(bullets.Count!=0){
-            sended = bullets[bullets.Count-1] as PictureBox;
-            bulletMove(LastButton, sended);
+            sended = bullets[bullets.Count-1] as Bullet_Attributes;
+            bulletMove(sended);
+            
             }
         }
 
@@ -70,7 +71,7 @@ namespace ProjectTank
             if (e.KeyCode == Keys.Right) { rightkey = true; LastButton="rightkey" ;}
             if (e.KeyCode == Keys.Up) { upkey = true; LastButton = "upkey";}
             if (e.KeyCode == Keys.Down) { downkey = true; LastButton = "downkey"; }
-            if (e.KeyCode == Keys.Space)
+            if (e.KeyCode == Keys.Space )
             {
                 bulletCreate(LastButton);
             }
@@ -184,13 +185,15 @@ namespace ProjectTank
             fire = true; Console.WriteLine("bullet create and showing on the screen");
             if (direction == "rightkey")
             {
-                PictureBox bullet = new PictureBox();
+                Bullet_Attributes bullet = new Bullet_Attributes();
+                //PictureBox bullet = new PictureBox();
                 bullet.Name = "bullet";
                 bullet.Location = new Point(tank1.Left+tank1.Width+10, tank1.Top+tank1.Height/2-5);
                 bullet.Size = new Size(15, 15);
                 bullet.BackColor = Color.Black;
                 //bullet.Image = (Bitmap)(e.Data.GetData(DataFormats.Bitmap));
                 bullet.Visible = true;
+                bullet.direction = "right";
                 panel1.Controls.Add(bullet);
                 bullets.Add(bullet);
                // bulletMove("rightkey",bullet);
@@ -198,66 +201,72 @@ namespace ProjectTank
             
             if (direction == "leftkey")
             {
-                PictureBox bullet = new PictureBox();
+                Bullet_Attributes bullet = new Bullet_Attributes();
+                //PictureBox bullet = new PictureBox();
                 bullet.Name = "bullet";
                 bullet.Location = new Point(tank1.Left -10, tank1.Top);
                 bullet.Size = new Size(15, 15);
                 bullet.BackColor = Color.Black;
                 //bullet.Image = (Bitmap)(e.Data.GetData(DataFormats.Bitmap));
                 bullet.Visible = true;
+                bullet.direction = "left";
                 panel1.Controls.Add(bullet);
                 bullets.Add(bullet);
               //  bulletMove("leftkey",bullet);
             }
             if (direction == "upkey")
             {
-                PictureBox bullet = new PictureBox();
+                Bullet_Attributes bullet = new Bullet_Attributes();
+                //PictureBox bullet = new PictureBox();
                 bullet.Name = "bullet";
                 bullet.Location = new Point(tank1.Left, tank1.Top-10);
                 bullet.Size = new Size(15, 15);
                 bullet.BackColor = Color.Black;
                 //bullet.Image = (Bitmap)(e.Data.GetData(DataFormats.Bitmap));
                 bullet.Visible = true;
+                bullet.direction = "up";
                 panel1.Controls.Add(bullet);
                 bullets.Add(bullet);
                 //bulletMove("upkey",bullet);
             }
             if (direction == "downkey")
             {
-                PictureBox bullet = new PictureBox();
+                Bullet_Attributes bullet = new Bullet_Attributes();
+                //PictureBox bullet = new PictureBox();
                 bullet.Name = "bullet";
                 bullet.Location = new Point(tank1.Left, tank1.Top+ tank1.Height+10);
                 bullet.Size = new Size(15, 15);
                 bullet.BackColor = Color.Black;
                 //bullet.Image = (Bitmap)(e.Data.GetData(DataFormats.Bitmap));
                 bullet.Visible = true;
+                bullet.direction = "down";
                 panel1.Controls.Add(bullet);
                 bullets.Add(bullet);
                // bulletMove("downkey",bullet);
             }
         }
-        public void bulletMove(String direction,PictureBox LastBullet)
+        public void bulletMove(Bullet_Attributes currentBullet)
         {
-            if (direction == "rightkey")
+            if (currentBullet.direction == "right")
             {
-                    LastBullet.Location = new Point(LastBullet.Left + 10, LastBullet.Top);
+                currentBullet.Location = new Point(currentBullet.Left + 10, currentBullet.Top);
                 
             }
-            else if (direction == "leftkey")
+            else if (currentBullet.direction == "left")
             {
-                        LastBullet.Location = new Point(LastBullet.Left - 10, LastBullet.Top);
+                currentBullet.Location = new Point(currentBullet.Left - 10, currentBullet.Top);
                  
             }
-             else if (direction == "upkey")
+            else if (currentBullet.direction == "up")
             {
-                
-                    LastBullet.Location = new Point(LastBullet.Left, LastBullet.Top - 10);
+
+                currentBullet.Location = new Point(currentBullet.Left, currentBullet.Top - 10);
                 
             }
-            else if (direction == "downkey")
+            else if (currentBullet.direction == "down")
             {
-                
-                    LastBullet.Location = new Point(LastBullet.Left, LastBullet.Top + 10);
+
+                currentBullet.Location = new Point(currentBullet.Left, currentBullet.Top + 10);
                 
             }
 
