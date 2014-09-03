@@ -72,7 +72,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1414, 817);
+            this.panel1.Size = new System.Drawing.Size(1142, 555);
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -80,11 +80,12 @@
             // 
             this.wall10.BackColor = System.Drawing.Color.DarkGoldenrod;
             this.wall10.Dock = System.Windows.Forms.DockStyle.Right;
-            this.wall10.Location = new System.Drawing.Point(1364, 50);
+            this.wall10.Location = new System.Drawing.Point(1092, 50);
             this.wall10.Name = "wall10";
-            this.wall10.Size = new System.Drawing.Size(50, 717);
+            this.wall10.Size = new System.Drawing.Size(50, 455);
             this.wall10.TabIndex = 10;
             this.wall10.TabStop = false;
+            this.wall10.Tag = "BorderWalls";
             // 
             // wall9
             // 
@@ -92,19 +93,21 @@
             this.wall9.Dock = System.Windows.Forms.DockStyle.Left;
             this.wall9.Location = new System.Drawing.Point(0, 50);
             this.wall9.Name = "wall9";
-            this.wall9.Size = new System.Drawing.Size(50, 717);
+            this.wall9.Size = new System.Drawing.Size(50, 455);
             this.wall9.TabIndex = 9;
             this.wall9.TabStop = false;
+            this.wall9.Tag = "BorderWalls";
             // 
             // wall8
             // 
             this.wall8.BackColor = System.Drawing.Color.DarkGoldenrod;
             this.wall8.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.wall8.Location = new System.Drawing.Point(0, 767);
+            this.wall8.Location = new System.Drawing.Point(0, 505);
             this.wall8.Name = "wall8";
-            this.wall8.Size = new System.Drawing.Size(1414, 50);
+            this.wall8.Size = new System.Drawing.Size(1142, 50);
             this.wall8.TabIndex = 8;
             this.wall8.TabStop = false;
+            this.wall8.Tag = "BorderWalls";
             // 
             // wall7
             // 
@@ -112,9 +115,10 @@
             this.wall7.Dock = System.Windows.Forms.DockStyle.Top;
             this.wall7.Location = new System.Drawing.Point(0, 0);
             this.wall7.Name = "wall7";
-            this.wall7.Size = new System.Drawing.Size(1414, 50);
+            this.wall7.Size = new System.Drawing.Size(1142, 50);
             this.wall7.TabIndex = 7;
             this.wall7.TabStop = false;
+            this.wall7.Tag = "BorderWalls";
             // 
             // wall6
             // 
@@ -142,6 +146,7 @@
             this.wall4.Size = new System.Drawing.Size(50, 50);
             this.wall4.TabIndex = 4;
             this.wall4.TabStop = false;
+            this.wall4.Tag = "d_Wall";
             // 
             // wall2
             // 
@@ -190,7 +195,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1414, 817);
+            this.ClientSize = new System.Drawing.Size(1142, 555);
             this.Controls.Add(this.panel1);
             this.Name = "Form1";
             this.Text = "Form1";

@@ -17,10 +17,13 @@ namespace ProjectTank
         #region Global Değişkenler
         bool right, left, up, down;
         bool upkey, rightkey, leftkey, downkey;
-        bool fire;
+        bool fire, isfired;
+
         String LastButton;
+
         ArrayList walls = new ArrayList();
         ArrayList bullets = new ArrayList();
+
         #endregion
         public Form1()
         {
@@ -29,6 +32,7 @@ namespace ProjectTank
 
         private void Form1_Load(object sender, System.EventArgs e)
         {
+            isfired = false;
             walls.Add(wall1);
             walls.Add(wall2);
             walls.Add(wall3);
@@ -39,6 +43,7 @@ namespace ProjectTank
             walls.Add(wall8);
             walls.Add(wall9);
             walls.Add(wall10);
+
            
         }
 
@@ -56,8 +61,9 @@ namespace ProjectTank
             if(bullets.Count!=0){
             sended = bullets[bullets.Count-1] as Bullet_Attributes;
             bulletMove(sended);
-            
+            bulletCollision();
             }
+                
         }
 
         private void tank1_Click(object sender, EventArgs e)
@@ -73,6 +79,7 @@ namespace ProjectTank
             if (e.KeyCode == Keys.Down) { downkey = true; LastButton = "downkey"; }
             if (e.KeyCode == Keys.Space )
             {
+                
                 bulletCreate(LastButton);
             }
         }
@@ -182,68 +189,73 @@ namespace ProjectTank
 
         public void bulletCreate(String direction)
         {
-            fire = true; Console.WriteLine("bullet create and showing on the screen");
-            if (direction == "rightkey")
+            fire = true;
+            if (isfired == false )
             {
-                Bullet_Attributes bullet = new Bullet_Attributes();
-                //PictureBox bullet = new PictureBox();
-                bullet.Name = "bullet";
-                bullet.Location = new Point(tank1.Left+tank1.Width+10, tank1.Top+tank1.Height/2-5);
-                bullet.Size = new Size(15, 15);
-                bullet.BackColor = Color.Black;
-                //bullet.Image = (Bitmap)(e.Data.GetData(DataFormats.Bitmap));
-                bullet.Visible = true;
-                bullet.direction = "right";
-                panel1.Controls.Add(bullet);
-                bullets.Add(bullet);
-               // bulletMove("rightkey",bullet);
+                Console.WriteLine("bullet create and showing on the screen");
+                if (direction == "rightkey")
+                {
+                    Bullet_Attributes bullet = new Bullet_Attributes();
+                    //PictureBox bullet = new PictureBox();
+                    bullet.Name = "bullet";
+                    bullet.Location = new Point(tank1.Left + tank1.Width + 10, tank1.Top + tank1.Height / 2 - 5);
+                    bullet.Size = new Size(15, 15);
+                    bullet.BackColor = Color.Black;
+                    //bullet.Image = (Bitmap)(e.Data.GetData(DataFormats.Bitmap));
+                    bullet.Visible = true;
+                    bullet.direction = "right";
+                    panel1.Controls.Add(bullet);
+                    bullets.Add(bullet);
+                    // bulletMove("rightkey",bullet);
+                }
+
+                if (direction == "leftkey")
+                {
+                    Bullet_Attributes bullet = new Bullet_Attributes();
+                    //PictureBox bullet = new PictureBox();
+                    bullet.Name = "bullet";
+                    bullet.Location = new Point(tank1.Left - 10, tank1.Top);
+                    bullet.Size = new Size(15, 15);
+                    bullet.BackColor = Color.Black;
+                    //bullet.Image = (Bitmap)(e.Data.GetData(DataFormats.Bitmap));
+                    bullet.Visible = true;
+                    bullet.direction = "left";
+                    panel1.Controls.Add(bullet);
+                    bullets.Add(bullet);
+                    //  bulletMove("leftkey",bullet);
+                }
+                if (direction == "upkey")
+                {
+                    Bullet_Attributes bullet = new Bullet_Attributes();
+                    //PictureBox bullet = new PictureBox();
+                    bullet.Name = "bullet";
+                    bullet.Location = new Point(tank1.Left, tank1.Top - 10);
+                    bullet.Size = new Size(15, 15);
+                    bullet.BackColor = Color.Black;
+                    //bullet.Image = (Bitmap)(e.Data.GetData(DataFormats.Bitmap));
+                    bullet.Visible = true;
+                    bullet.direction = "up";
+                    panel1.Controls.Add(bullet);
+                    bullets.Add(bullet);
+                    //bulletMove("upkey",bullet);
+                }
+                if (direction == "downkey")
+                {
+                    Bullet_Attributes bullet = new Bullet_Attributes();
+                    //PictureBox bullet = new PictureBox();
+                    bullet.Name = "bullet";
+                    bullet.Location = new Point(tank1.Left, tank1.Top + tank1.Height + 10);
+                    bullet.Size = new Size(15, 15);
+                    bullet.BackColor = Color.Black;
+                    //bullet.Image = (Bitmap)(e.Data.GetData(DataFormats.Bitmap));
+                    bullet.Visible = true;
+                    bullet.direction = "down";
+                    panel1.Controls.Add(bullet);
+                    bullets.Add(bullet);
+                    // bulletMove("downkey",bullet);
+                }
             }
-            
-            if (direction == "leftkey")
-            {
-                Bullet_Attributes bullet = new Bullet_Attributes();
-                //PictureBox bullet = new PictureBox();
-                bullet.Name = "bullet";
-                bullet.Location = new Point(tank1.Left -10, tank1.Top);
-                bullet.Size = new Size(15, 15);
-                bullet.BackColor = Color.Black;
-                //bullet.Image = (Bitmap)(e.Data.GetData(DataFormats.Bitmap));
-                bullet.Visible = true;
-                bullet.direction = "left";
-                panel1.Controls.Add(bullet);
-                bullets.Add(bullet);
-              //  bulletMove("leftkey",bullet);
-            }
-            if (direction == "upkey")
-            {
-                Bullet_Attributes bullet = new Bullet_Attributes();
-                //PictureBox bullet = new PictureBox();
-                bullet.Name = "bullet";
-                bullet.Location = new Point(tank1.Left, tank1.Top-10);
-                bullet.Size = new Size(15, 15);
-                bullet.BackColor = Color.Black;
-                //bullet.Image = (Bitmap)(e.Data.GetData(DataFormats.Bitmap));
-                bullet.Visible = true;
-                bullet.direction = "up";
-                panel1.Controls.Add(bullet);
-                bullets.Add(bullet);
-                //bulletMove("upkey",bullet);
-            }
-            if (direction == "downkey")
-            {
-                Bullet_Attributes bullet = new Bullet_Attributes();
-                //PictureBox bullet = new PictureBox();
-                bullet.Name = "bullet";
-                bullet.Location = new Point(tank1.Left, tank1.Top+ tank1.Height+10);
-                bullet.Size = new Size(15, 15);
-                bullet.BackColor = Color.Black;
-                //bullet.Image = (Bitmap)(e.Data.GetData(DataFormats.Bitmap));
-                bullet.Visible = true;
-                bullet.direction = "down";
-                panel1.Controls.Add(bullet);
-                bullets.Add(bullet);
-               // bulletMove("downkey",bullet);
-            }
+            isfired = true;
         }
         public void bulletMove(Bullet_Attributes currentBullet)
         {
@@ -271,9 +283,37 @@ namespace ProjectTank
             }
 
         }
-        
+
+        public void bulletCollision()
+        {
+            foreach (PictureBox wallmember in walls)
+            {
+                Bullet_Attributes fired_bullet = new Bullet_Attributes();
+                fired_bullet=bullets[bullets.Count-1] as Bullet_Attributes;
+                if(wallmember.Bounds.IntersectsWith(new Rectangle(fired_bullet.Location.X,fired_bullet.Location.Y,fired_bullet.Width,fired_bullet.Height)))
+                {
+                    isfired = false;
+                    #region Destroy and Damage Processes
+                    if (wallmember.Tag == "Enemy")
+                    {
+                        Console.WriteLine("Enemy hit");
+                    }
+                    if (wallmember.Tag == "d_Wall")
+                    {
+                        Console.WriteLine("Bricket has been hit");
+                    }
+                    #endregion
+                }
+
+            }
+
+
+        }
+
 
         
 
-    }
+
+
+    }//clas bitişi
 }
