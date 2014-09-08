@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.wall10 = new System.Windows.Forms.PictureBox();
             this.wall9 = new System.Windows.Forms.PictureBox();
             this.wall8 = new System.Windows.Forms.PictureBox();
@@ -41,7 +42,6 @@
             this.wall3 = new System.Windows.Forms.PictureBox();
             this.wall1 = new System.Windows.Forms.PictureBox();
             this.tank1 = new System.Windows.Forms.PictureBox();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.wall10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.wall9)).BeginInit();
@@ -75,6 +75,12 @@
             this.panel1.Size = new System.Drawing.Size(1142, 555);
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // wall10
             // 
@@ -128,6 +134,7 @@
             this.wall6.Size = new System.Drawing.Size(50, 50);
             this.wall6.TabIndex = 6;
             this.wall6.TabStop = false;
+            this.wall6.Tag = "d_Wall";
             // 
             // wall5
             // 
@@ -137,6 +144,7 @@
             this.wall5.Size = new System.Drawing.Size(50, 50);
             this.wall5.TabIndex = 5;
             this.wall5.TabStop = false;
+            this.wall5.Tag = "d_Wall";
             // 
             // wall4
             // 
@@ -156,6 +164,7 @@
             this.wall2.Size = new System.Drawing.Size(50, 50);
             this.wall2.TabIndex = 3;
             this.wall2.TabStop = false;
+            this.wall2.Tag = "d_Wall";
             // 
             // wall3
             // 
@@ -165,6 +174,7 @@
             this.wall3.Size = new System.Drawing.Size(50, 50);
             this.wall3.TabIndex = 2;
             this.wall3.TabStop = false;
+            this.wall3.Tag = "d_Wall";
             // 
             // wall1
             // 
@@ -174,22 +184,19 @@
             this.wall1.Size = new System.Drawing.Size(50, 50);
             this.wall1.TabIndex = 1;
             this.wall1.TabStop = false;
+            this.wall1.Tag = "d_Wall";
             // 
             // tank1
             // 
-            this.tank1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.tank1.Location = new System.Drawing.Point(640, 403);
+            this.tank1.BackColor = System.Drawing.Color.Transparent;
+            this.tank1.Image = global::ProjectTank.Properties.Resources.battle_city_tank_1990_1_l_124x124;
+            this.tank1.Location = new System.Drawing.Point(643, 375);
             this.tank1.Name = "tank1";
             this.tank1.Size = new System.Drawing.Size(50, 50);
+            this.tank1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.tank1.TabIndex = 0;
             this.tank1.TabStop = false;
             this.tank1.Click += new System.EventHandler(this.tank1_Click);
-            // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 1;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Form1
             // 

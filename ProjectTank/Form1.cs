@@ -24,6 +24,12 @@ namespace ProjectTank
         ArrayList walls = new ArrayList();
         ArrayList bullets = new ArrayList();
 
+        //Player Images Path
+        String path_down = Application.StartupPath + "\\Assets\\Player_Tank\\idle_down.png";
+        String path_up = Application.StartupPath + "\\Assets\\Player_Tank\\idle_up.png";
+        String path_right = Application.StartupPath + "\\Assets\\Player_Tank\\idle_right.png";
+        String path_left = Application.StartupPath + "\\Assets\\Player_Tank\\idle_left.png";
+
         #endregion
         public Form1()
         {
@@ -73,10 +79,10 @@ namespace ProjectTank
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Left) { leftkey = true; LastButton="leftkey" ;}
-            if (e.KeyCode == Keys.Right) { rightkey = true; LastButton="rightkey" ;}
-            if (e.KeyCode == Keys.Up) { upkey = true; LastButton = "upkey";}
-            if (e.KeyCode == Keys.Down) { downkey = true; LastButton = "downkey"; }
+            if (e.KeyCode == Keys.Left) { leftkey = true; LastButton = "leftkey"; tank1.Image = Image.FromFile(path_left); }
+            if (e.KeyCode == Keys.Right) { rightkey = true; LastButton = "rightkey"; tank1.Image = Image.FromFile(path_right); }
+            if (e.KeyCode == Keys.Up) { upkey = true; LastButton = "upkey"; tank1.Image = Image.FromFile(path_up); }
+            if (e.KeyCode == Keys.Down) { downkey = true; LastButton = "downkey"; tank1.Image = Image.FromFile(path_down); }
             if (e.KeyCode == Keys.Space )
             {
                 
@@ -214,7 +220,7 @@ namespace ProjectTank
                     Bullet_Attributes bullet = new Bullet_Attributes();
                     //PictureBox bullet = new PictureBox();
                     bullet.Name = "bullet";
-                    bullet.Location = new Point(tank1.Left - 10, tank1.Top);
+                    bullet.Location = new Point(tank1.Left - 10, tank1.Top + tank1.Height/2 -5);
                     bullet.Size = new Size(15, 15);
                     bullet.BackColor = Color.Black;
                     //bullet.Image = (Bitmap)(e.Data.GetData(DataFormats.Bitmap));
@@ -229,7 +235,7 @@ namespace ProjectTank
                     Bullet_Attributes bullet = new Bullet_Attributes();
                     //PictureBox bullet = new PictureBox();
                     bullet.Name = "bullet";
-                    bullet.Location = new Point(tank1.Left, tank1.Top - 10);
+                    bullet.Location = new Point(tank1.Left +tank1.Width/2 -5 , tank1.Top - 10);
                     bullet.Size = new Size(15, 15);
                     bullet.BackColor = Color.Black;
                     //bullet.Image = (Bitmap)(e.Data.GetData(DataFormats.Bitmap));
@@ -244,12 +250,15 @@ namespace ProjectTank
                     Bullet_Attributes bullet = new Bullet_Attributes();
                     //PictureBox bullet = new PictureBox();
                     bullet.Name = "bullet";
-                    bullet.Location = new Point(tank1.Left, tank1.Top + tank1.Height + 10);
+                    bullet.Location = new Point(tank1.Left + tank1.Width/2 -5  , tank1.Top + tank1.Height + 10);
                     bullet.Size = new Size(15, 15);
                     bullet.BackColor = Color.Black;
                     //bullet.Image = (Bitmap)(e.Data.GetData(DataFormats.Bitmap));
                     bullet.Visible = true;
                     bullet.direction = "down";
+                    //String path_down = Application.StartupPath + "\\Assets\\Player_Tank\\idle_down.png";
+                    
+                   
                     panel1.Controls.Add(bullet);
                     bullets.Add(bullet);
                     // bulletMove("downkey",bullet);
@@ -289,6 +298,7 @@ namespace ProjectTank
             foreach (PictureBox wallmember in walls)
             {
                 Bullet_Attributes fired_bullet = new Bullet_Attributes();
+                if(bullets[bullets.Count -1] != null)
                 fired_bullet=bullets[bullets.Count-1] as Bullet_Attributes;
                 if(wallmember.Bounds.IntersectsWith(new Rectangle(fired_bullet.Location.X,fired_bullet.Location.Y,fired_bullet.Width,fired_bullet.Height)))
                 {
@@ -300,8 +310,22 @@ namespace ProjectTank
                     }
                     if (wallmember.Tag == "d_Wall")
                     {
-                        Console.WriteLine("Bricket has been hit");
+                        panel1.Controls.Remove(fired_bullet);
+                        
+                        panel1.Controls.Remove(wallmember);
+                        //walls.RemoveAt(walls.IndexOf(wallmember));
+                        bullets.Remove(fired_bullet);
+                        walls.Remove(wallmember);
+                        break;
+                        //Console.WriteLine("Bricket has been hit");
                     }
+                    if (wallmember.Tag == "BorderWalls")
+                    {
+                        panel1.Controls.Remove(fired_bullet);
+                        bullets.Remove(fired_bullet);
+                        break;
+                    }
+
                     #endregion
                 }
 
