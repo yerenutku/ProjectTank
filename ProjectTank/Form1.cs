@@ -29,7 +29,7 @@ namespace ProjectTank
         String path_up = Application.StartupPath + "\\Assets\\Player_Tank\\idle_up.png";
         String path_right = Application.StartupPath + "\\Assets\\Player_Tank\\idle_right.png";
         String path_left = Application.StartupPath + "\\Assets\\Player_Tank\\idle_left.png";
-
+        //Walls Images Path
         String path_d_wall = Application.StartupPath + "\\Assets\\Walls\\d_wall.png";
 
 
@@ -55,7 +55,7 @@ namespace ProjectTank
             Control.ControlCollection coll = panel1.Controls;
             foreach (Control c in coll)
             {
-                if (c.Tag == "d_Wall" || c.Tag == "BorderWalls" || c.Tag =="nd_Wall" )
+                if (c.Tag == "d_Wall" || c.Tag == "BorderWalls" || c.Tag =="nd_Wall" || c.Tag == "Enemy" )
                     walls.Add(c);
                 
             }

@@ -63,39 +63,9 @@ namespace ProjectTank.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Adsız {
-            get {
-                object obj = ResourceManager.GetObject("Adsız", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap battle_city_tank_1990_1_l_124x124 {
             get {
                 object obj = ResourceManager.GetObject("battle-city-tank-1990-1-l-124x124", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap border_walls {
-            get {
-                object obj = ResourceManager.GetObject("border_walls", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap border_walls_vertical {
-            get {
-                object obj = ResourceManager.GetObject("border_walls_vertical", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
