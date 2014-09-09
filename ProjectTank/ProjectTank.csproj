@@ -119,6 +119,24 @@
   <ItemGroup>
     <None Include="Resources\battle-city-tank-1990-1-l-124x124.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\d_wall.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\nd_wall.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\border_walls.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\border_walls1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\border_walls_vertical.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\border_walls_vertical1.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

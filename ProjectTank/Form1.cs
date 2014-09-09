@@ -30,6 +30,9 @@ namespace ProjectTank
         String path_right = Application.StartupPath + "\\Assets\\Player_Tank\\idle_right.png";
         String path_left = Application.StartupPath + "\\Assets\\Player_Tank\\idle_left.png";
 
+        String path_d_wall = Application.StartupPath + "\\Assets\\Walls\\d_wall.png";
+
+
         #endregion
         public Form1()
         {
@@ -39,26 +42,37 @@ namespace ProjectTank
         private void Form1_Load(object sender, System.EventArgs e)
         {
             isfired = false;
-            walls.Add(wall1);
-            walls.Add(wall2);
-            walls.Add(wall3);
-            walls.Add(wall4);
-            walls.Add(wall5);
-            walls.Add(wall6);
-            walls.Add(wall7);
-            walls.Add(wall8);
-            walls.Add(wall9);
-            walls.Add(wall10);
+            //walls.Add(wall1);
+            //walls.Add(wall2);
+            //walls.Add(wall3);
+            //walls.Add(wall4);
+            //walls.Add(wall5);
+            //walls.Add(wall6);
+            //walls.Add(wall7);
+            //walls.Add(wall8);
+            //walls.Add(wall9);
+            //walls.Add(wall10);
+            Control.ControlCollection coll = panel1.Controls;
+            foreach (Control c in coll)
+            {
+                if (c.Tag == "d_Wall" || c.Tag == "BorderWalls" || c.Tag =="nd_Wall" )
+                    walls.Add(c);
+                
+            }
+            //foreach (PictureBox s in walls)
+            //{
+            //    s.Image = Image.FromFile(path_d_wall);
+            //}
 
            
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (right == true && rightkey==true) { tank1.Left += 5; }
-            if (left == true && leftkey==true ) { tank1.Left -= 5; }
-            if (up == true && upkey == true) { tank1.Top -= 5; }
-            if (down == true && downkey == true) { tank1.Top += 5; }
+            if (right == true && rightkey==true) { tank1.Left += 2; }
+            if (left == true && leftkey==true ) { tank1.Left -= 2; }
+            if (up == true && upkey == true) { tank1.Top -= 2; }
+            if (down == true && downkey == true) { tank1.Top += 2; }
                 
 
             right = true; left = true; up = true; down = true;
@@ -91,10 +105,10 @@ namespace ProjectTank
         }
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Left) { leftkey = false;  }
-            if (e.KeyCode == Keys.Right) { rightkey = false;  }
-            if (e.KeyCode == Keys.Up) { upkey = false;  }
-            if (e.KeyCode == Keys.Down) { downkey = false; }
+            if (e.KeyCode == Keys.Left) { leftkey = false;}
+            if (e.KeyCode == Keys.Right) { rightkey = false;}
+            if (e.KeyCode == Keys.Up) { upkey = false;}
+            if (e.KeyCode == Keys.Down) { downkey = false;}
             if (e.KeyCode == Keys.Space) { fire = false; }
         }
         public void collision()
@@ -206,7 +220,7 @@ namespace ProjectTank
                     bullet.Name = "bullet";
                     bullet.Location = new Point(tank1.Left + tank1.Width + 10, tank1.Top + tank1.Height / 2 - 5);
                     bullet.Size = new Size(15, 15);
-                    bullet.BackColor = Color.Black;
+                    bullet.BackColor = Color.Red;
                     //bullet.Image = (Bitmap)(e.Data.GetData(DataFormats.Bitmap));
                     bullet.Visible = true;
                     bullet.direction = "right";
@@ -222,7 +236,7 @@ namespace ProjectTank
                     bullet.Name = "bullet";
                     bullet.Location = new Point(tank1.Left - 10, tank1.Top + tank1.Height/2 -5);
                     bullet.Size = new Size(15, 15);
-                    bullet.BackColor = Color.Black;
+                    bullet.BackColor = Color.Red;
                     //bullet.Image = (Bitmap)(e.Data.GetData(DataFormats.Bitmap));
                     bullet.Visible = true;
                     bullet.direction = "left";
@@ -237,7 +251,7 @@ namespace ProjectTank
                     bullet.Name = "bullet";
                     bullet.Location = new Point(tank1.Left +tank1.Width/2 -5 , tank1.Top - 10);
                     bullet.Size = new Size(15, 15);
-                    bullet.BackColor = Color.Black;
+                    bullet.BackColor = Color.Red;
                     //bullet.Image = (Bitmap)(e.Data.GetData(DataFormats.Bitmap));
                     bullet.Visible = true;
                     bullet.direction = "up";
@@ -252,7 +266,7 @@ namespace ProjectTank
                     bullet.Name = "bullet";
                     bullet.Location = new Point(tank1.Left + tank1.Width/2 -5  , tank1.Top + tank1.Height + 10);
                     bullet.Size = new Size(15, 15);
-                    bullet.BackColor = Color.Black;
+                    bullet.BackColor = Color.Red;
                     //bullet.Image = (Bitmap)(e.Data.GetData(DataFormats.Bitmap));
                     bullet.Visible = true;
                     bullet.direction = "down";
@@ -319,7 +333,7 @@ namespace ProjectTank
                         break;
                         //Console.WriteLine("Bricket has been hit");
                     }
-                    if (wallmember.Tag == "BorderWalls")
+                    if (wallmember.Tag == "BorderWalls" || wallmember.Tag == "nd_Wall")
                     {
                         panel1.Controls.Remove(fired_bullet);
                         bullets.Remove(fired_bullet);
