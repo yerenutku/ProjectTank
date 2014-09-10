@@ -376,6 +376,93 @@ namespace ProjectTank
         {
             foreach (EnemyAttributes e_tank in enemyTanks)
             {
+                foreach (PictureBox wallmember in walls)
+                {
+
+                    if (e_tank.move_right == true&&wallmember.Bounds.IntersectsWith(new Rectangle(e_tank.Location.X + 5, e_tank.Location.Y, e_tank.Width, e_tank.Height)))
+                    {
+                        e_tank.move_right = false;
+                        //if (e_tank.move_left == false && e_tank.move_down == false) 
+                        //{ 
+                        //    e_tank.edirection = 4;
+                        //}
+                        //else if (e_tank.move_left == false && e_tank.move_up == false)
+                        //{
+                        //    e_tank.edirection = 3;
+                        //}
+                        //else if (e_tank.move_down == false && e_tank.move_up == false)
+                        //{
+                        //    e_tank.edirection = 2;
+                        //}
+                        //else 
+                        e_tank.randomer();
+                    }
+                }
+
+                foreach (PictureBox wallmember in walls)
+                {
+                    if (e_tank.move_left == true&&wallmember.Bounds.IntersectsWith(new Rectangle(e_tank.Location.X - 5, e_tank.Location.Y, e_tank.Width, e_tank.Height)))
+                    {
+                        e_tank.move_left = false;
+                        //if (e_tank.move_right == false && e_tank.move_down == false)
+                        //{
+                        //    e_tank.edirection = 4;
+                        //}
+                        //else if (e_tank.move_right == false && e_tank.move_up == false)
+                        //{
+                        //    e_tank.edirection = 3;
+                        //}
+                        //else if (e_tank.move_down == false && e_tank.move_up == false)
+                        //{
+                        //    e_tank.edirection = 1;
+                        //}
+                        //else 
+                            e_tank.randomer();
+                    } 
+                }
+                foreach (PictureBox wallmember in walls)
+                {
+                    if (e_tank.move_down == true&&wallmember.Bounds.IntersectsWith(new Rectangle(e_tank.Location.X, e_tank.Location.Y + 5, e_tank.Width, e_tank.Height)))
+                    {
+                        e_tank.move_down = false;
+                        //if (e_tank.move_left == false && e_tank.move_right == false)
+                        //{
+                        //    e_tank.edirection = 4;
+                        //}
+                        //else if (e_tank.move_left == false && e_tank.move_up == false)
+                        //{
+                        //    e_tank.edirection = 1;
+                        //}
+                        //else if (e_tank.move_right == false && e_tank.move_up == false)
+                        //{
+                        //    e_tank.edirection = 2;
+                        //}
+                        //else 
+                            e_tank.randomer();
+                    }
+                }
+                foreach (PictureBox wallmember in walls)
+                {
+                    if (e_tank.move_up==true&&wallmember.Bounds.IntersectsWith(new Rectangle(e_tank.Location.X, e_tank.Location.Y - 5, e_tank.Width, e_tank.Height)))
+                    {
+                        e_tank.move_up = false;
+                        //if (e_tank.move_left == false && e_tank.move_right == false)
+                        //{
+                        //    e_tank.edirection = 3;
+                        //}
+                        //else if (e_tank.move_left == false && e_tank.move_down == false)
+                        //{
+                        //    e_tank.edirection = 1;
+                        //}
+                        //else if (e_tank.move_right == false && e_tank.move_down == false)
+                        //{
+                        //    e_tank.edirection = 2;
+                        //}
+                        //else 
+                        e_tank.randomer();
+                    }
+                }
+                
                 e_tank.move();
             }
         }
@@ -387,7 +474,13 @@ namespace ProjectTank
 
         private void timer3_Tick(object sender, EventArgs e)
         {
-          
+            foreach (EnemyAttributes e_tank in enemyTanks)
+            {
+                e_tank.move_up = true;
+                e_tank.move_left = true;
+                e_tank.move_right = true;
+                e_tank.move_down = true;
+            }
         }
         
 
