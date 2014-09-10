@@ -19,11 +19,18 @@ namespace ProjectTank
         bool upkey, rightkey, leftkey, downkey;
         bool fire, isfired;
 
+        //Enemy Tank Moves
+        bool isenemyMove_left = true;
+        bool isenemyMove_right = true;
+        bool isenemyMove_down = true;
+        bool isenemyMove_up = true;
+        int random_direction;
+
         String LastButton;
 
         ArrayList walls = new ArrayList();
         ArrayList bullets = new ArrayList();
-
+        ArrayList enemyTanks = new ArrayList();
         //Player Images Path
         String path_down = Application.StartupPath + "\\Assets\\Player_Tank\\idle_down.png";
         String path_up = Application.StartupPath + "\\Assets\\Player_Tank\\idle_up.png";
@@ -55,13 +62,20 @@ namespace ProjectTank
             Control.ControlCollection coll = panel1.Controls;
             foreach (Control c in coll)
             {
-                if (c.Tag == "d_Wall" || c.Tag == "BorderWalls" || c.Tag =="nd_Wall" || c.Tag == "Enemy" )
+                if (c.Tag == "d_Wall" || c.Tag == "BorderWalls" || c.Tag =="nd_Wall" )
                     walls.Add(c);
                 
             }
             //foreach (PictureBox s in walls)
             //{
             //    s.Image = Image.FromFile(path_d_wall);
+            //}
+
+            //foreach (Control c in coll)
+            //{
+            //    if (c.Tag == "Enemy")
+            //        enemyTanks.Add(c);
+
             //}
 
            
@@ -82,13 +96,23 @@ namespace ProjectTank
             sended = bullets[bullets.Count-1] as Bullet_Attributes;
             bulletMove(sended);
             bulletCollision();
+
             }
+            
                 
         }
 
         private void tank1_Click(object sender, EventArgs e)
         {
-            
+            EnemyAttributes enemyObj = new EnemyAttributes();
+            enemyObj.Name = "enemy";
+            enemyObj.Tag = "Enemy";
+            enemyObj.Location = new Point(74, 66);
+            enemyObj.Size = new Size(50, 50);
+            enemyObj.BackColor = Color.White;
+            enemyObj.Visible = true;
+            panel1.Controls.Add(enemyObj);
+            enemyTanks.Add(enemyObj);
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -348,7 +372,23 @@ namespace ProjectTank
 
         }
 
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            foreach (EnemyAttributes e_tank in enemyTanks)
+            {
+                e_tank.move();
+            }
+        }
 
+        public void enemyCollision()
+        {
+           
+        }
+
+        private void timer3_Tick(object sender, EventArgs e)
+        {
+          
+        }
         
 
 

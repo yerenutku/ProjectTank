@@ -62,6 +62,9 @@
     <Compile Include="Bullet_Attributes.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="EnemyAttributes.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
