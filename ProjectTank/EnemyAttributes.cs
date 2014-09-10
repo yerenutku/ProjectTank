@@ -14,9 +14,17 @@ namespace ProjectTank
         public bool move_left, move_right, move_up, move_down;
         public int edirection;
 
+        String enemy_down = Application.StartupPath + "\\Assets\\Enemy_Tank\\enemy_down.png";
+        String enemy_up = Application.StartupPath + "\\Assets\\Enemy_Tank\\enemy_up.png";
+        String enemy_right = Application.StartupPath + "\\Assets\\Enemy_Tank\\enemy_right.png";
+        String enemy_left = Application.StartupPath + "\\Assets\\Enemy_Tank\\enemy_left.png";
+
 
         public EnemyAttributes()
         {
+            this.SizeMode = PictureBoxSizeMode.StretchImage;
+            this.BackColor = Color.Transparent;
+            
             move_left = false;
             move_right = false;
             move_up = false;
@@ -38,18 +46,22 @@ namespace ProjectTank
             if (edirection == 1&& move_right ==true) // going right
             {
                 this.Location = new Point(this.Left + 5, this.Top);
+                this.Image = Image.FromFile(enemy_right);
             }
             if (edirection == 2&& move_left == true) // going left
             {
                 this.Location = new Point(this.Left - 5, this.Top);
+                this.Image = Image.FromFile(enemy_left);
             }
             if (edirection == 3&& move_down==true) // going down
             {
                 this.Location = new Point(this.Left, this.Top + 5);
+                this.Image = Image.FromFile(enemy_down);
             }
             if (edirection == 4 && move_up == true) //going up
             {
                 this.Location = new Point(this.Left, this.Top - 5);
+                this.Image = Image.FromFile(enemy_up);
             }
 
         }

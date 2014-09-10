@@ -109,7 +109,6 @@ namespace ProjectTank
             enemyObj.Tag = "Enemy";
             enemyObj.Location = new Point(74, 66);
             enemyObj.Size = new Size(50, 50);
-            enemyObj.BackColor = Color.White;
             enemyObj.Visible = true;
             panel1.Controls.Add(enemyObj);
             enemyTanks.Add(enemyObj);

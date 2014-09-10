@@ -103,6 +103,16 @@ namespace ProjectTank.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap enemy_left {
+            get {
+                object obj = ResourceManager.GetObject("enemy_left", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap nd_wall {
             get {
                 object obj = ResourceManager.GetObject("nd_wall", resourceCulture);
