@@ -78,6 +78,45 @@ namespace ProjectTank
 
             //}
 
+            EnemyAttributes enemyObj = new EnemyAttributes(panel1);
+            enemyObj.Name = "enemy";
+            enemyObj.Tag = "Enemy";
+            enemyObj.Location = new Point(60, 72);
+            enemyObj.Size = new Size(50, 50);
+            enemyObj.Visible = true;
+            panel1.Controls.Add(enemyObj);
+            enemyTanks.Add(enemyObj);
+
+            EnemyAttributes enemyObj2 = new EnemyAttributes(panel1);
+            enemyObj2.Name = "enemy";
+            enemyObj2.Tag = "Enemy";
+            enemyObj2.Location = new Point(1025, 68);
+            enemyObj2.Size = new Size(50, 50);
+            enemyObj2.Visible = true;
+            panel1.Controls.Add(enemyObj2);
+            enemyTanks.Add(enemyObj2);
+
+
+            EnemyAttributes enemyObj3 = new EnemyAttributes(panel1);
+            enemyObj3.Name = "enemy";
+            enemyObj3.Tag = "Enemy";
+            enemyObj3.Location = new Point(1025, 320);
+            enemyObj3.Size = new Size(50, 50);
+            enemyObj3.Visible = true;
+            panel1.Controls.Add(enemyObj3);
+            enemyTanks.Add(enemyObj3);
+
+
+
+            EnemyAttributes enemyObj4 = new EnemyAttributes(panel1);
+            enemyObj4.Name = "enemy";
+            enemyObj4.Tag = "Enemy";
+            enemyObj4.Location = new Point(60, 315);
+            enemyObj4.Size = new Size(50, 50);
+            enemyObj4.Visible = true;
+            panel1.Controls.Add(enemyObj4);
+            enemyTanks.Add(enemyObj4);
+
            
         }
 
@@ -98,20 +137,24 @@ namespace ProjectTank
             bulletCollision();
 
             }
-            
+            foreach (EnemyAttributes enemytanks in enemyTanks)
+            {
+                if (enemytanks.isfired == false)
+                {
+                    enemytanks.bulletCreate();
+                    
+                    
+                }
+                enemyBulletCollision();
+                enemytanks.bulletMove();
+                
+            }
                 
         }
 
         private void tank1_Click(object sender, EventArgs e)
         {
-            EnemyAttributes enemyObj = new EnemyAttributes();
-            enemyObj.Name = "enemy";
-            enemyObj.Tag = "Enemy";
-            enemyObj.Location = new Point(74, 66);
-            enemyObj.Size = new Size(50, 50);
-            enemyObj.Visible = true;
-            panel1.Controls.Add(enemyObj);
-            enemyTanks.Add(enemyObj);
+            
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -332,11 +375,14 @@ namespace ProjectTank
 
         public void bulletCollision()
         {
+            Bullet_Attributes fired_bullet = new Bullet_Attributes();
+            if (bullets[bullets.Count - 1] != null)
+            fired_bullet = bullets[bullets.Count - 1] as Bullet_Attributes;
             foreach (PictureBox wallmember in walls)
             {
-                Bullet_Attributes fired_bullet = new Bullet_Attributes();
-                if(bullets[bullets.Count -1] != null)
-                fired_bullet=bullets[bullets.Count-1] as Bullet_Attributes;
+                //Bullet_Attributes fired_bullet = new Bullet_Attributes();
+                //if(bullets[bullets.Count -1] != null)
+                //fired_bullet=bullets[bullets.Count-1] as Bullet_Attributes;
                 if(wallmember.Bounds.IntersectsWith(new Rectangle(fired_bullet.Location.X,fired_bullet.Location.Y,fired_bullet.Width,fired_bullet.Height)))
                 {
                     isfired = false;
@@ -367,8 +413,120 @@ namespace ProjectTank
                 }
 
             }
+            foreach (EnemyAttributes e_tanks in enemyTanks)
+            {
+                if (e_tanks.Bounds.IntersectsWith(new Rectangle(fired_bullet.Location.X, fired_bullet.Location.Y, fired_bullet.Width, fired_bullet.Height)))
+                {
+                    isfired = false;
+                    panel1.Controls.Remove(fired_bullet);
+
+                    panel1.Controls.Remove(e_tanks);
+                    bullets.Remove(fired_bullet);
+                    
+                    enemyTanks.Remove(e_tanks);
+                    break; 
+                    
+                  
+                }
+            }
 
 
+        }
+
+
+        public void enemyBulletCollision()
+        {
+            
+                foreach (EnemyAttributes enemytanks in enemyTanks)
+                {
+
+                    foreach (PictureBox wallmember in walls)
+                    {
+                        Bullet_Attributes fired_bullet = new Bullet_Attributes();
+                        if (enemytanks.bullets.Count != 0)
+                        {
+                            fired_bullet = enemytanks.bullets[enemytanks.bullets.Count - 1] as Bullet_Attributes;
+                        }
+                        if (wallmember.Bounds.IntersectsWith(new Rectangle(fired_bullet.Location.X, fired_bullet.Location.Y, fired_bullet.Width, fired_bullet.Height)))
+                        {
+                            //isfired = false;
+                            #region Destroy and Damage Processes
+                            if (wallmember.Tag == "Enemy")
+                            {
+                                Console.WriteLine("Enemy hit");
+                            }
+                            if (wallmember.Tag == "d_Wall")
+                            {
+                                panel1.Controls.Remove(fired_bullet);
+
+                                panel1.Controls.Remove(wallmember);
+                                //walls.RemoveAt(walls.IndexOf(wallmember));
+                                enemytanks.bullets.Remove(fired_bullet);
+                                //enemytanks.isfired = false;
+                                walls.Remove(wallmember);
+                                break;
+                                //Console.WriteLine("Bricket has been hit");
+                            }
+                            if (wallmember.Tag == "BorderWalls" || wallmember.Tag == "nd_Wall")
+                            {
+                                panel1.Controls.Remove(fired_bullet);
+                                enemytanks.bullets.Remove(fired_bullet);
+                                //enemytanks.isfired = false;
+                                break;
+                            }
+
+                            #endregion
+                        }
+
+                    }
+
+
+                    
+                    
+                    
+                    
+                    
+                    
+                    //foreach (PictureBox wallmember in walls)
+                    //{
+                    //    if (wallmember.Bounds.IntersectsWith(new Rectangle(enemytanks.bullet.Location.X, enemytanks.bullet.Location.Y, enemytanks.bullet.Width, enemytanks.bullet.Height)))
+                    //    {
+
+                    //        #region Destroy and Damage Processes
+                    //        if (wallmember.Tag == "Enemy")
+                    //        {
+                    //            Console.WriteLine("Enemy hit");
+                    //        }
+                    //        if (wallmember.Tag == "d_Wall")
+                    //        {
+                    //            panel1.Controls.Remove(enemytanks.bullet);
+                    //            enemytanks.isfired = false;
+                    //            panel1.Controls.Remove(wallmember);
+                    //            //walls.RemoveAt(walls.IndexOf(wallmember));
+                    //            enemytanks.bullets.Remove(enemytanks.bullet);
+                    //            walls.Remove(wallmember);
+                    //            break;
+                    //            //Console.WriteLine("Bricket has been hit");
+                    //        }
+                    //        if (wallmember.Tag == "BorderWalls" || wallmember.Tag == "nd_Wall")
+                    //        {
+                    //            panel1.Controls.Remove(enemytanks.bullet);
+                    //            enemytanks.isfired = false;
+                    //            enemytanks.bullets.Remove(enemytanks.bullet);
+                    //            break;
+                    //        }
+
+                    //        #endregion
+                    //    }
+
+                    //}
+                    if (tank1.Bounds.IntersectsWith(new Rectangle(enemytanks.bullet.Location.X, enemytanks.bullet.Location.Y, enemytanks.bullet.Width, enemytanks.bullet.Height)))
+                    {
+                        Console.WriteLine("GAME OVER!!!!");
+                    }
+                }
+
+            
         }
 
         private void timer2_Tick(object sender, EventArgs e)
@@ -414,10 +572,7 @@ namespace ProjectTank
             }
         }
 
-        public void enemyCollision()
-        {
-           
-        }
+       
 
         private void timer3_Tick(object sender, EventArgs e)
         {
@@ -427,6 +582,11 @@ namespace ProjectTank
                 e_tank.move_left = true;
                 e_tank.move_right = true;
                 e_tank.move_down = true;
+                if (e_tank.isfired == false)
+                {
+                   
+
+                }
             }
         }
 
@@ -436,7 +596,7 @@ namespace ProjectTank
             {
                 foreach (EnemyAttributes other_tank in enemyTanks)
                 {
-                    if (e_tank == other_tank) continue;
+                   if (e_tank == other_tank) continue;
                    if (e_tank.move_right == true&&other_tank.Bounds.IntersectsWith(new Rectangle(e_tank.Location.X + 5, e_tank.Location.Y, e_tank.Width, e_tank.Height)))
                     {
                         e_tank.move_right = false;
@@ -464,6 +624,14 @@ namespace ProjectTank
                 }
             }
 
+        }
+
+        private void enemyFireTime_Tick(object sender, EventArgs e)
+        {
+            foreach (EnemyAttributes e_tank in enemyTanks)
+            {
+                e_tank.isfired = false;
+            }
         }
         
 
