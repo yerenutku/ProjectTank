@@ -27,7 +27,7 @@ namespace ProjectTank
         int random_direction;
 
         String LastButton;
-
+        ArrayList temp_form = new ArrayList();
         ArrayList walls = new ArrayList();
         ArrayList bullets = new ArrayList();
         ArrayList enemyTanks = new ArrayList();
@@ -41,6 +41,9 @@ namespace ProjectTank
 
 
         #endregion
+        Panel panel_Temp;
+
+        Form1 form1;
         public Form1()
         {
             InitializeComponent();
@@ -48,6 +51,7 @@ namespace ProjectTank
 
         private void Form1_Load(object sender, System.EventArgs e)
         {
+            form1 = new Form1();
             isfired = false;
             //walls.Add(wall1);
             //walls.Add(wall2);
@@ -62,9 +66,13 @@ namespace ProjectTank
             Control.ControlCollection coll = panel1.Controls;
             foreach (Control c in coll)
             {
-                if (c.Tag == "d_Wall" || c.Tag == "BorderWalls" || c.Tag =="nd_Wall" )
+                if (c.Tag == "d_Wall" || c.Tag == "BorderWalls" || c.Tag =="nd_Wall" || c.Tag == "bird" )
                     walls.Add(c);
                 
+            }
+            foreach (Control c in coll)
+            {
+                temp_form.Add(c);
             }
             //foreach (PictureBox s in walls)
             //{
@@ -117,7 +125,7 @@ namespace ProjectTank
             panel1.Controls.Add(enemyObj4);
             enemyTanks.Add(enemyObj4);
 
-           
+            panel_Temp = panel1;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -408,10 +416,41 @@ namespace ProjectTank
                         bullets.Remove(fired_bullet);
                         break;
                     }
+                    if (wallmember.Tag == "bird")
+                    {
+                        
+                        panel1.Controls.Remove(fired_bullet);
 
+                        panel1.Controls.Remove(wallmember);
+                        //walls.RemoveAt(walls.IndexOf(wallmember));
+                        bullets.Remove(fired_bullet);
+                        walls.Remove(wallmember);
+                        timer1.Enabled = false;
+                        timer2.Enabled = false;
+                        timer3.Enabled = false;
+                        timer4.Enabled = false;
+                        enemyFireTime.Enabled = false;
+                        enemyLookYasin.Enabled = false;
+                        MessageBox.Show("NEYSEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE",
+        "YASİNİN G...");
+                        
+
+                        //DialogResult result1 = MessageBox.Show("YASİN BOOM","YASİN GÜÜM",MessageBoxButtons.YesNo);
+                        //if (result1 == DialogResult.Yes) 
+                        //{ 
+                        //    panel1.Controls.Clear();
+                        //    foreach (Control c in temp_form)
+                        //    {
+                        //        panel1.Controls.Add(c);
+                        //    }
+                            
+                        //}
+                        //else if (result1 == DialogResult.No) { Console.WriteLine("İPTAL ETTİİİ"); }
+                        break;
+                    }
                     #endregion
                 }
-
+                
             }
             foreach (EnemyAttributes e_tanks in enemyTanks)
             {
@@ -472,6 +511,11 @@ namespace ProjectTank
                                 panel1.Controls.Remove(fired_bullet);
                                 enemytanks.bullets.Remove(fired_bullet);
                                 //enemytanks.isfired = false;
+                                break;
+                            }
+                            if (wallmember.Tag == "bird")
+                            {
+                                MessageBox.Show("Kuş gg");
                                 break;
                             }
 
@@ -578,6 +622,7 @@ namespace ProjectTank
         {
             foreach (EnemyAttributes e_tank in enemyTanks)
             {
+                
                 e_tank.move_up = true;
                 e_tank.move_left = true;
                 e_tank.move_right = true;
@@ -631,6 +676,14 @@ namespace ProjectTank
             foreach (EnemyAttributes e_tank in enemyTanks)
             {
                 e_tank.isfired = false;
+            }
+        }
+
+        private void enemyLookYasin_Tick(object sender, EventArgs e)
+        {
+            foreach (EnemyAttributes e_tank in enemyTanks)
+            {
+                e_tank.move_down = true;
             }
         }
         
