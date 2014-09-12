@@ -14,6 +14,7 @@ namespace ProjectTank
 {
     public partial class Form1 : Form
     {
+
         #region Global Değişkenler
         bool right, left, up, down;
         bool upkey, rightkey, leftkey, downkey;
@@ -51,6 +52,7 @@ namespace ProjectTank
 
         private void Form1_Load(object sender, System.EventArgs e)
         {
+            
             form1 = new Form1();
             isfired = false;
             //walls.Add(wall1);
@@ -190,15 +192,20 @@ namespace ProjectTank
             //her collision için foreach döner.
             //hepsi tek bir foreach içinde döner ise kesişme noktalarında sadece tek bir yön çalışır ve foreach kırılır.
             //moving actions
-            foreach (PictureBox wallmember in walls){
+            
+            
+            
+            
+                foreach (PictureBox wallmember in walls)
+                {
 
                 if(wallmember.Bounds.IntersectsWith(new Rectangle(tank1.Location.X+5,tank1.Location.Y,tank1.Width,tank1.Height)))
                 {
                     //Console.WriteLine("collision detected"+ wallmember.Name);
                     right = false; break;
 
-                } right = true;
-            }
+                    } right = true;
+                }
 
                 foreach (PictureBox wallmember in walls)
                 {
@@ -221,12 +228,11 @@ namespace ProjectTank
                     up = false; break;
                 } up = true;
 
-                   
+                 
+    
+
                 
-                //if(tank1.Bounds.IntersectsWith(wallmember.Bounds))
-                   //{
-                   //    Console.WriteLine("collision ihlal");
-                   //}
+               
                 }
 
 
@@ -569,7 +575,6 @@ namespace ProjectTank
                         Console.WriteLine("GAME OVER!!!!");
                     }
                 }
-
             
         }
 
@@ -611,6 +616,29 @@ namespace ProjectTank
                         e_tank.randomer();
                     }
                 }
+                //enemy tanks collisions with Main Tank.
+                if (e_tank.move_right == true&& tank1.Bounds.IntersectsWith(new Rectangle(e_tank.Location.X + 5, e_tank.Location.Y, e_tank.Width, e_tank.Height)))
+                    {
+                        e_tank.move_right = false;
+                        e_tank.randomer();
+                    }
+                if (e_tank.move_left == true && tank1.Bounds.IntersectsWith(new Rectangle(e_tank.Location.X - 5, e_tank.Location.Y, e_tank.Width, e_tank.Height)))
+                {
+                    e_tank.move_left = false;
+                    e_tank.randomer();
+                }
+
+                if (e_tank.move_down == true && tank1.Bounds.IntersectsWith(new Rectangle(e_tank.Location.X, e_tank.Location.Y + 5, e_tank.Width, e_tank.Height)))
+                {
+                    e_tank.move_down = false;
+                    e_tank.randomer();
+                }
+                if (e_tank.move_up == true && tank1.Bounds.IntersectsWith(new Rectangle(e_tank.Location.X, e_tank.Location.Y - 5, e_tank.Width, e_tank.Height)))
+                {
+                    e_tank.move_up = false;
+                    e_tank.randomer();
+                }
+                
                 
                 e_tank.move();
             }
@@ -622,16 +650,11 @@ namespace ProjectTank
         {
             foreach (EnemyAttributes e_tank in enemyTanks)
             {
-                
-                e_tank.move_up = true;
-                e_tank.move_left = true;
-                e_tank.move_right = true;
+                if (e_tank.Left - yasin.Left > 0) e_tank.move_right = true;
+                if (e_tank.Left - yasin.Left > 0) e_tank.move_left = true;
+               // e_tank.move_up = true;                
                 e_tank.move_down = true;
-                if (e_tank.isfired == false)
-                {
-                   
-
-                }
+                
             }
         }
 
@@ -642,19 +665,19 @@ namespace ProjectTank
                 foreach (EnemyAttributes other_tank in enemyTanks)
                 {
                    if (e_tank == other_tank) continue;
-                   if (e_tank.move_right == true&&other_tank.Bounds.IntersectsWith(new Rectangle(e_tank.Location.X + 5, e_tank.Location.Y, e_tank.Width, e_tank.Height)))
+                   if (e_tank.move_right == true && other_tank.Bounds.IntersectsWith(new Rectangle(e_tank.Location.X + 5, e_tank.Location.Y, e_tank.Width, e_tank.Height)))
                     {
                         e_tank.move_right = false;
                         e_tank.randomer();
                     }
                 
-                    if (e_tank.move_left == true&&other_tank.Bounds.IntersectsWith(new Rectangle(e_tank.Location.X - 5, e_tank.Location.Y, e_tank.Width, e_tank.Height)))
+                    if (e_tank.move_left == true && other_tank.Bounds.IntersectsWith(new Rectangle(e_tank.Location.X - 5, e_tank.Location.Y, e_tank.Width, e_tank.Height)))
                     {
                         e_tank.move_left = false;
                         e_tank.randomer();
                     } 
                 
-                    if (e_tank.move_down == true&&other_tank.Bounds.IntersectsWith(new Rectangle(e_tank.Location.X, e_tank.Location.Y + 5, e_tank.Width, e_tank.Height)))
+                    if (e_tank.move_down == true && other_tank.Bounds.IntersectsWith(new Rectangle(e_tank.Location.X, e_tank.Location.Y + 5, e_tank.Width, e_tank.Height)))
                     {
                         e_tank.move_down = false;
                         e_tank.randomer();
@@ -684,6 +707,36 @@ namespace ProjectTank
             foreach (EnemyAttributes e_tank in enemyTanks)
             {
                 e_tank.move_down = true;
+                e_tank.move_up = true;
+                e_tank.move_left = true;
+                e_tank.move_right = true;
+            }
+        }
+
+        private void timer5_Tick(object sender, EventArgs e)
+        {
+            foreach (EnemyAttributes e_tank in enemyTanks)
+            {
+                if (e_tank.Bounds.IntersectsWith(new Rectangle(tank1.Location.X + 5, tank1.Location.Y, tank1.Width, tank1.Height)))
+                {
+                    rightkey = false; right = false; break;
+
+                }
+
+                if (e_tank.Bounds.IntersectsWith(new Rectangle(tank1.Location.X - 5, tank1.Location.Y, tank1.Width, tank1.Height)))
+                {
+                    leftkey = false; left = false; break;
+                }
+
+                if (e_tank.Bounds.IntersectsWith(new Rectangle(tank1.Location.X, tank1.Location.Y + 5, tank1.Width, tank1.Height)))
+                {
+                    downkey = false; down = false; break;
+                }
+                if (e_tank.Bounds.IntersectsWith(new Rectangle(tank1.Location.X, tank1.Location.Y - 5, tank1.Width, tank1.Height)))
+                {
+                    upkey = false; up = false; break;
+                }
+
             }
         }
         

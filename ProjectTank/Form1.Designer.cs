@@ -29,6 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.timer3 = new System.Windows.Forms.Timer(this.components);
+            this.timer4 = new System.Windows.Forms.Timer(this.components);
+            this.enemyFireTime = new System.Windows.Forms.Timer(this.components);
+            this.enemyLookYasin = new System.Windows.Forms.Timer(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.yasin = new System.Windows.Forms.PictureBox();
             this.pictureBox96 = new System.Windows.Forms.PictureBox();
@@ -132,12 +138,7 @@
             this.wall4 = new System.Windows.Forms.PictureBox();
             this.wall2 = new System.Windows.Forms.PictureBox();
             this.tank1 = new System.Windows.Forms.PictureBox();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.timer2 = new System.Windows.Forms.Timer(this.components);
-            this.timer3 = new System.Windows.Forms.Timer(this.components);
-            this.timer4 = new System.Windows.Forms.Timer(this.components);
-            this.enemyFireTime = new System.Windows.Forms.Timer(this.components);
-            this.enemyLookYasin = new System.Windows.Forms.Timer(this.components);
+            this.timer5 = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.yasin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox96)).BeginInit();
@@ -243,9 +244,43 @@
             ((System.ComponentModel.ISupportInitialize)(this.tank1)).BeginInit();
             this.SuspendLayout();
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // timer2
+            // 
+            this.timer2.Enabled = true;
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
+            // timer3
+            // 
+            this.timer3.Enabled = true;
+            this.timer3.Interval = 1000;
+            this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
+            // 
+            // timer4
+            // 
+            this.timer4.Enabled = true;
+            this.timer4.Tick += new System.EventHandler(this.timer4_Tick);
+            // 
+            // enemyFireTime
+            // 
+            this.enemyFireTime.Enabled = true;
+            this.enemyFireTime.Interval = 3000;
+            this.enemyFireTime.Tick += new System.EventHandler(this.enemyFireTime_Tick);
+            // 
+            // enemyLookYasin
+            // 
+            this.enemyLookYasin.Enabled = true;
+            this.enemyLookYasin.Interval = 4500;
+            this.enemyLookYasin.Tick += new System.EventHandler(this.enemyLookYasin_Tick);
+            // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.panel1.BackColor = System.Drawing.Color.Black;
             this.panel1.Controls.Add(this.yasin);
             this.panel1.Controls.Add(this.pictureBox96);
             this.panel1.Controls.Add(this.pictureBox95);
@@ -1583,39 +1618,11 @@
             this.tank1.TabStop = false;
             this.tank1.Click += new System.EventHandler(this.tank1_Click);
             // 
-            // timer1
+            // timer5
             // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 1;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // timer2
-            // 
-            this.timer2.Enabled = true;
-            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
-            // 
-            // timer3
-            // 
-            this.timer3.Enabled = true;
-            this.timer3.Interval = 1000;
-            this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
-            // 
-            // timer4
-            // 
-            this.timer4.Enabled = true;
-            this.timer4.Tick += new System.EventHandler(this.timer4_Tick);
-            // 
-            // enemyFireTime
-            // 
-            this.enemyFireTime.Enabled = true;
-            this.enemyFireTime.Interval = 3000;
-            this.enemyFireTime.Tick += new System.EventHandler(this.enemyFireTime_Tick);
-            // 
-            // enemyLookYasin
-            // 
-            this.enemyLookYasin.Enabled = true;
-            this.enemyLookYasin.Interval = 4500;
-            this.enemyLookYasin.Tick += new System.EventHandler(this.enemyLookYasin_Tick);
+            this.timer5.Enabled = true;
+            this.timer5.Interval = 1;
+            this.timer5.Tick += new System.EventHandler(this.timer5_Tick);
             // 
             // Form1
             // 
@@ -1846,6 +1853,7 @@
         private System.Windows.Forms.PictureBox pictureBox92;
         private System.Windows.Forms.PictureBox yasin;
         private System.Windows.Forms.Timer enemyLookYasin;
+        private System.Windows.Forms.Timer timer5;
     }
 }
 
