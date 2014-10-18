@@ -438,7 +438,7 @@ namespace ProjectTank
                         enemyFireTime.Enabled = false;
                         enemyLookYasin.Enabled = false;
                         MessageBox.Show("NEYSEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE",
-        "YASİNİN G...");
+        "YASİN DİYOR Kİ:");
                         
 
                         //DialogResult result1 = MessageBox.Show("YASİN BOOM","YASİN GÜÜM",MessageBoxButtons.YesNo);
@@ -578,6 +578,8 @@ namespace ProjectTank
             
         }
 
+
+        //Enemy Tank Move decision
         private void timer2_Tick(object sender, EventArgs e)
         {
             foreach (EnemyAttributes e_tank in enemyTanks)
@@ -589,6 +591,18 @@ namespace ProjectTank
                     {
                         e_tank.move_right = false;
                         e_tank.randomer();
+                        //if (e_tank.Left - yasin.Left > 0)
+                        //{
+                        //    e_tank.move_left = true; break;
+                        //}
+                        //if ((e_tank.Top + e_tank.Height) - (yasin.Top + yasin.Height) > 0)
+                        //{
+                        //    e_tank.move_up = true;
+                        //}
+                        
+                        //    e_tank.move_down = true;
+                        
+
                     }
                 }
 
@@ -598,6 +612,19 @@ namespace ProjectTank
                     {
                         e_tank.move_left = false;
                         e_tank.randomer();
+                        //if (e_tank.Left - yasin.Left < 0)
+                        //{
+                        //    e_tank.move_right = true; break;
+                        //}
+                        //if ((e_tank.Top + e_tank.Height) - (yasin.Top + yasin.Height) > 0)
+                        //{
+                        //    e_tank.move_up = true;
+                        //}
+                        
+                        //    e_tank.move_down = true;
+                        
+
+
                     } 
                 }
                 foreach (PictureBox wallmember in walls)
@@ -606,6 +633,17 @@ namespace ProjectTank
                     {
                         e_tank.move_down = false;
                         e_tank.randomer();
+                        //if (e_tank.Left - yasin.Left < 0)
+                        //{
+                        //    e_tank.move_right = true; break;
+                        //}
+                        //if (e_tank.Left - yasin.Left > 0)
+                        //{
+                        //    e_tank.move_left = true;
+                        //}
+                        //e_tank.move_up = true;
+
+
                     }
                 }
                 foreach (PictureBox wallmember in walls)
@@ -614,11 +652,22 @@ namespace ProjectTank
                     {
                         e_tank.move_up = false;
                         e_tank.randomer();
+                        //if (e_tank.Left - yasin.Left < 0)
+                        //{
+                        //    e_tank.move_right = true; break;
+                        //}
+                        //if (e_tank.Left - yasin.Left > 0)
+                        //{
+                        //    e_tank.move_left = true;
+                        //}
+                        //e_tank.move_down = true;
                     }
                 }
                 //enemy tanks collisions with Main Tank.
                 if (e_tank.move_right == true&& tank1.Bounds.IntersectsWith(new Rectangle(e_tank.Location.X + 5, e_tank.Location.Y, e_tank.Width, e_tank.Height)))
                     {
+                            
+
                         e_tank.move_right = false;
                         e_tank.randomer();
                     }
@@ -652,10 +701,20 @@ namespace ProjectTank
             {
                 if (e_tank.Left - yasin.Left > 0) e_tank.move_right = true;
                 if (e_tank.Left - yasin.Left > 0) e_tank.move_left = true;
-               // e_tank.move_up = true;                
+                // e_tank.move_up = true;                
                 e_tank.move_down = true;
-                
+
             }
+
+            //foreach (EnemyAttributes e_tank in enemyTanks)
+            //{
+            //    e_tank.move_left = true;
+            //    e_tank.move_right = true;
+            //    e_tank.move_up= true;
+            //    e_tank.move_down = true;
+
+
+            //}
         }
 
         private void timer4_Tick(object sender, EventArgs e)
@@ -712,7 +771,7 @@ namespace ProjectTank
                 e_tank.move_right = true;
             }
         }
-
+        // Main tank collision with enemy tanks
         private void timer5_Tick(object sender, EventArgs e)
         {
             foreach (EnemyAttributes e_tank in enemyTanks)
@@ -739,8 +798,27 @@ namespace ProjectTank
 
             }
         }
-        
 
+        private void yasin_shake_Tick(object sender, EventArgs e)
+        {
+            yasinShake();
+        }
+        bool yasin_left=true;
+        public void yasinShake()
+        {
+            if (yasin_left == true)
+            {
+                yasin.Left += 7;
+                yasin_left = false;
+            }
+            else
+            {
+                yasin.Left -= 7;
+                yasin_left = true;
+            }
+
+
+        }
 
 
     }//clas bitişi
